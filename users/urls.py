@@ -109,7 +109,7 @@ urlpatterns = [
         name="block_remove",
     ),
     path('signup/', SignUpView.as_view(), name='signup'),
-    path('search/', search_view, name='search'),
-    path('<int:pk>/',
+    path('searc/', search_view, name='search_user'),
+    path('<int:user_id>/',
          MyPageView.as_view(), name='my_page'),
 ]

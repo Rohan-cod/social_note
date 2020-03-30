@@ -20,6 +20,7 @@ from django.urls import path, include, reverse_lazy
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import views as auth_views
 from notes import views
+from users import views
 
 urlpatterns = [
     path(
