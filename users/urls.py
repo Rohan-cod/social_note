@@ -24,6 +24,7 @@ from users.views import (
     SignUpView,
     MyPageView,
     search_view,
+    UserdetailcreateView,
 )
 
 urlpatterns = [
@@ -110,6 +111,7 @@ urlpatterns = [
     ),
     path('signup/', SignUpView.as_view(), name='signup'),
     path('searc/', search_view, name='search_user'),
-    path('<int:user_id>/',
+    path('<int:pk>/',
          MyPageView.as_view(), name='my_page'),
+    path('new/', UserdetailcreateView.as_view(), name='user_detail'),
 ]

@@ -11,6 +11,8 @@ from django.urls import reverse_lazy
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 from django.http import JsonResponse
+from .models import User_detail
+from .forms import UserdetailForm
 from django.template.loader import render_to_string
 try:
     from django.contrib.auth import get_user_model
@@ -22,9 +24,15 @@ except ImportError:
     user_model = User
 
 class MyPageView(LoginRequiredMixin, DetailView):
-    model = get_user_model()
+    model = User_detail
     template_name = 'my_page.html'
     login_url = 'login'
+
+class UserdetailcreateView(LoginRequiredMixin, CreateView):
+    model = User_detail
+    template_name = 'add_details.html'
+    form_class = UserdetailForm
+    success_url = reverse_lazy('home')
 
 def search_view(request):
     ctx = {}

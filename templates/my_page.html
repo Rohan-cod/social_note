@@ -1,16 +1,22 @@
 {% extends 'base.html' %}
 {% load friendshiptags %}
-{% block title %}My Profile{% endblock title %}
-
 {% block content %}
-  <h1>Profile</h1>
-  <hr>
 
-  <h3>Name: {{ object.username }}</h3>
+  <h1>Your Details</h1>
+  <hr>
   <br>
-  <h3>Friends:</h3>
+  <h2>Name: {{object.use.username}}</h2>
+  <br>
+  <h2>nickname: {{object.nick_name}}</h2>
+  <br>
+  <h2>Age: {{object.age}}</h2>
+  <br>
+  <h2>email: {{object.email}}</h2>
+  <br>
+  <br>
+  <h2>Friends:</h2>
   <hr>
- {% get_by_name friendship_context_object_name as var %}
+  <br>
+  {% get_by_name friendship_context_object_name as var %}
   {% friends var %}
-
 {% endblock content %}

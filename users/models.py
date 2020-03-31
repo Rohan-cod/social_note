@@ -1,5 +1,5 @@
 from __future__ import unicode_literals
-
+from django.urls import reverse
 from django.conf import settings
 from django.core.cache import cache
 from django.core.exceptions import ValidationError
@@ -7,7 +7,7 @@ from django.db import models
 from django.db.models import Q
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
-
+from django.contrib.auth import get_user_model
 from friendship.exceptions import AlreadyExistsError, AlreadyFriendsError
 from friendship.signals import (
     block_created,
@@ -78,6 +78,24 @@ def bust_cache(type, user_pk):
     bust_keys = BUST_CACHES[type]
     keys = [CACHE_TYPES[k] % user_pk for k in bust_keys]
     cache.delete_many(keys)
+
+class User_detail(models.Model):
+    nick_name = models.CharField(max_length=120, null=True, blank=True)
+    email = models.CharField(max_length=254, null=True, blank=True)
+    age = models.PositiveIntegerField(null=True, blank=True)
+    use = models.ForeignKey(
+        get_user_model(),
+        on_delete=models.CASCADE,
+        null=True, blank=True)
+    
+    def __str__(self):
+        return self.nick_name
+
+
+    def get_absolute_url(self):
+        return reverse('users/my_page', args=[str(self.id)])
+
+
 
 
 class FriendshipRequest(models.Model):
